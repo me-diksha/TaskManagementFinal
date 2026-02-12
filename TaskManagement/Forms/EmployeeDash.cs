@@ -28,7 +28,7 @@ namespace TaskManagement
 
         private void RefreshGrid()
         {
-            dataGridView1.DataSource = null;
+            //dataGridView1.DataSource = null;
             dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
             dataGridView1.Columns["UserId"].Visible = false;
             //dataGridView1.Columns["taskId"].HeaderText = "Task ID";
