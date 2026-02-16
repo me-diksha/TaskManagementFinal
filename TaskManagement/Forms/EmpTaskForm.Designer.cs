@@ -109,11 +109,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.DarkGoldenrod;
-            label1.Location = new Point(43, 20);
+            label1.Location = new Point(17, 20);
             label1.Name = "label1";
-            label1.Size = new Size(134, 25);
+            label1.Size = new Size(148, 30);
             label1.TabIndex = 1;
             label1.Text = "Task Status of";
             // 
@@ -179,11 +179,11 @@
             // info
             // 
             info.AutoSize = true;
-            info.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            info.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             info.ForeColor = Color.DarkGoldenrod;
-            info.Location = new Point(173, 20);
+            info.Location = new Point(161, 20);
             info.Name = "info";
-            info.Size = new Size(65, 25);
+            info.Size = new Size(72, 30);
             info.TabIndex = 6;
             info.Text = "label2";
             // 
