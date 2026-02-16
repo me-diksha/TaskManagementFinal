@@ -73,12 +73,30 @@ namespace TaskManagement
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null) return;
-            TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
-            _controllertask.deletetask(task);
-            //dataGridView1.DataSource = null;
-            //dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
-            //dataGridView1.Columns["UserId"].Visible = false;
-            RefreshGrid();
+            //TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
+            
+            
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to delete this item?",
+                      "Warning",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+                );
+
+            if (result == DialogResult.Yes)
+            {
+                // Code if user clicks Yes
+                TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
+                _controllertask.deletetask(task);
+                MessageBox.Show("Item deleted.");
+                RefreshGrid();
+            }
+            else
+            {
+                // Code if user clicks No
+                MessageBox.Show("Operation cancelled.");
+            }
+           
 
         }
 
