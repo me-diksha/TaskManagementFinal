@@ -12,8 +12,6 @@ namespace TaskManagement.Controller
         public UserData authenticate(string username, string password)
         {
 
-            //string query = "SELECT id,username,password,role FROM userdata WHERE username=@username AND password=@password";
-            //var conn = DBHelper.GetConnection();
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
@@ -47,12 +45,11 @@ namespace TaskManagement.Controller
             using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                //string query = "SELECT COUNT(*) FROM userdata WHERE username= @username;";
+                
                 using (var cmd = new NpgsqlCommand("SELECT userNameExist_fun(@username)", conn))
                 {
                     cmd.Parameters.AddWithValue("@username", username);
-                    //int count=Convert.ToInt32(cmd.ExecuteScalar())  ;
-                    //return count > 0;
+                   
                     return (bool)cmd.ExecuteScalar();
                 }
             }

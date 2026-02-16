@@ -49,13 +49,11 @@ namespace TaskManagement
         private void log_out_Click(object sender, EventArgs e)
         {
             this.Close();
-            //Application.Exit();
         }
 
         private void closebox_Click(object sender, EventArgs e)
         {
             this.Close();
-            //Application.Exit();
         }
     }
 }

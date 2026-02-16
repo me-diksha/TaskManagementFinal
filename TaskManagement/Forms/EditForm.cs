@@ -18,7 +18,6 @@ namespace TaskManagement
             InitializeComponent();
             selectedTask = t;
             update_description.Text = selectedTask.description;
-            //update_status.Text = Convert.ToString(selectedTask.status);
             chkStatus.Checked = selectedTask.status;
 
         }
@@ -26,7 +25,6 @@ namespace TaskManagement
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             selectedTask.description = update_description.Text;
-            //selectedTask.status = Convert.ToBoolean(update_status.Text);
             selectedTask.status=chkStatus.Checked;
             controller.updatetask(selectedTask);
             MessageBox.Show(" Task updated ! ");

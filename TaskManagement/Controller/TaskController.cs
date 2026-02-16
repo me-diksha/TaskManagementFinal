@@ -21,7 +21,7 @@ namespace TaskManagement.Controller
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "SELECT taskid,description,status FROM tasklist WHERE userid=@uid ";
+               
                 using (var cmd = new NpgsqlCommand("SELECT * FROM showtask_fun(@uid);", conn))
                 {
                     cmd.Parameters.AddWithValue("@uid", user_id);
@@ -44,12 +44,12 @@ namespace TaskManagement.Controller
 
 
 
-
+      
         public void changepassword(string username_added,string updated_password)
         {
             using (var conn = DBHelper.GetConnection()) {
                 conn.Open();
-                //string query = "UPDATE userdata SET password=@updated_password WHERE username=@username_added;";
+               
                 using (var cmd = new NpgsqlCommand("CALL changepassword_proc(@username_added,@updated_password);", conn))
                 {
 
@@ -69,7 +69,7 @@ namespace TaskManagement.Controller
             
             using (var conn = DBHelper.GetConnection()) { 
              conn.Open();
-                //string query = "SELECT username FROM userdata WHERE id=@id";
+             
                 using(var cmd= new NpgsqlCommand("SELECT getinfo_fun(@id);", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", user_id);
@@ -86,7 +86,7 @@ namespace TaskManagement.Controller
            using(var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "SELECT role FROM userdata WHERE id=@id";
+               
                 using( var cmd = new NpgsqlCommand("SELECT getrole_fun(@id);",conn))
                 {
                     cmd.Parameters.AddWithValue("@id",user_id);
@@ -103,12 +103,10 @@ namespace TaskManagement.Controller
             using (var conn = DBHelper.GetConnection()) {
                 conn.Open();
 
-                //string query = "SELECT COALESCE(MAX(taskid),0)+1 FROM tasklist WHERE userid=@uid";
                 using(var cmd=new NpgsqlCommand("SELECT get_next_taskid_fun(@uid);", conn))
                 {
                     cmd.Parameters.AddWithValue("@uid", user_id);
                    
-                    //using execute scalar to directly get single value
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -118,11 +116,10 @@ namespace TaskManagement.Controller
 
         public void AddTask(TaskList task) {
            
-            //for db
+            
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "INSERT INTO tasklist(userid,taskid,description,status) VALUES (@uid,@tid,@desc,@status);";
                 using (var cmd = new NpgsqlCommand("CALL add_task_proc(@uid,@tid,@desc,@status);", conn))
                 {
                     int nextid = getNextTaskId(task.userId);
@@ -133,7 +130,7 @@ namespace TaskManagement.Controller
                     cmd.Parameters.AddWithValue("@status", task.status);
 
 
-                    cmd.ExecuteNonQuery(); //when we dont want rows in return
+                    cmd.ExecuteNonQuery(); 
 
                 }
 
@@ -141,13 +138,13 @@ namespace TaskManagement.Controller
             }
 
 
-        //when edit button on employee click
+       
         public void updatetask(TaskList task)
         {
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "UPDATE tasklist SET description=@desc,status=@status WHERE taskid= @tid AND userid=@uid ";
+                
                 using (var cmd = new NpgsqlCommand("CALL update_task_proc(@tid,@uid,@desc,@status);", conn))
                 {
                     cmd.Parameters.AddWithValue("@desc", task.description);
@@ -170,7 +167,7 @@ namespace TaskManagement.Controller
             {
                 conn.Open();
 
-                //string query = "DELETE FROM tasklist WHERE taskid=@tid AND userid=@uid;";
+               
                 using (var cmd = new NpgsqlCommand("CALL delete_task_proc(@tid,@uid);", conn))
                 {
                     cmd.Parameters.AddWithValue("@tid", task.taskId);
@@ -182,6 +179,7 @@ namespace TaskManagement.Controller
         }
 
 
+
         public BindingList<UserData> getall(string getrole)
 
         {
@@ -190,7 +188,7 @@ namespace TaskManagement.Controller
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "SELECT id,username,role FROM userdata WHERE role=@role;";
+                
                 using( var cmd = new NpgsqlCommand("SELECT * FROM getall_fun(@role);",conn))
                 {
                     cmd.Parameters.AddWithValue("@role", getrole);
@@ -223,7 +221,7 @@ namespace TaskManagement.Controller
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query="SELECT taskid,description,status FROM tasklist WHERE userid=@userId AND status=@status";
+                
                 using (var cmd = new NpgsqlCommand("SELECT *FROM completedtask_fun(@userId,@status);", conn))
                 {
                     cmd.Parameters.AddWithValue("@userId", userId);
@@ -254,7 +252,7 @@ namespace TaskManagement.Controller
             using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
-                //string query = "SELECT taskid,description,status FROM tasklist WHERE userid=@userId AND status=@status";
+              
                 using (var cmd = new NpgsqlCommand("SELECT * FROM pendingtask_fun(@userId,@status);", conn))
                 {
                     cmd.Parameters.AddWithValue("@userId", userId);
@@ -280,11 +278,13 @@ namespace TaskManagement.Controller
         }
 
        
+
+  
         public void addNewUser(string addusername, string addpassword,string role)
         {
             using (var conn = DBHelper.GetConnection()) {
                 conn.Open();
-                //string query = "INSERT INTO userdata(username,password,role) VALUES (@addusername,@addpassword,@role);";
+              
                 using (var cmd = new NpgsqlCommand("CALL addNewUser_proc(@addusername,@addpassword,@role);", conn))
                 {
                     cmd.Parameters.AddWithValue("@addusername", addusername);

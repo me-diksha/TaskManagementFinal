@@ -19,8 +19,7 @@ namespace TaskManagement
             current_user = user;
             logged_name.Text = _controllertask.getInfo(current_user.Id);
             logged_role.Text = _controllertask.getrole(current_user.Id);
-            //dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
-            //dataGridView1.Columns["UserId"].Visible = false;
+          
             RefreshGrid();
         }
 
@@ -28,13 +27,10 @@ namespace TaskManagement
 
         private void RefreshGrid()
         {
-            //dataGridView1.DataSource = null;
+          
             dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
             dataGridView1.Columns["UserId"].Visible = false;
-            //dataGridView1.Columns["taskId"].HeaderText = "Task ID";
-            //dataGridView1.Columns["description"].HeaderText = "Task Description";
-            //dataGridView1.Columns["status"].HeaderText = "Is Completed";
-            //dataGridView1.Columns["taskId"].Visible = false;
+         
         }
 
 
@@ -45,10 +41,7 @@ namespace TaskManagement
         {
             AddForm f = new AddForm(current_user.Id);
             f.ShowDialog();
-            //dataGridView1.Refresh();
-            //dataGridView1.DataSource = null;
-            //dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
-            //dataGridView1.Columns["UserId"].Visible = false;
+            
             RefreshGrid();
 
         }
@@ -60,10 +53,7 @@ namespace TaskManagement
             if (dataGridView1.CurrentRow == null) return;
             TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
             new EditForm(task).ShowDialog();
-            //dataGridView1.Refresh();
-            //dataGridView1.DataSource = null;
-            //dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
-            //dataGridView1.Columns["UserId"].Visible = false;
+            
             RefreshGrid();
 
         }
@@ -73,7 +63,7 @@ namespace TaskManagement
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null) return;
-            //TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
+            
             
             
             DialogResult result = MessageBox.Show(
@@ -85,7 +75,7 @@ namespace TaskManagement
 
             if (result == DialogResult.Yes)
             {
-                // Code if user clicks Yes
+              
                 TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
                 _controllertask.deletetask(task);
                 MessageBox.Show("Item deleted.");
@@ -93,7 +83,7 @@ namespace TaskManagement
             }
             else
             {
-                // Code if user clicks No
+             
                 MessageBox.Show("Operation cancelled.");
             }
            
@@ -112,38 +102,24 @@ namespace TaskManagement
 
         private void log_out_Click(object sender, EventArgs e)
         {
-            //Application.Exit();
+        
             this.Close();
         }
 
 
-        //private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        //{
-        //    string rowNumber = (e.RowIndex + 1).ToString();
-
-        //    using (SolidBrush brush = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
-        //    {
-        //        e.Graphics.DrawString(
-        //            rowNumber,
-        //            dataGridView1.Font,
-        //            brush,
-        //            e.RowBounds.Left + 10,
-        //            e.RowBounds.Top + 4
-        //        );
-        //    }
-        //}
+       
 
 
         private void EmployeeDash_Load(object sender, EventArgs e)
         {
-            //dataGridView1.RowPostPaint += dataGridView1_RowPostPaint;
+            
 
         }
 
         private void closebox_Click(object sender, EventArgs e)
         {
             this.Close();
-            //Application.Exit();
+       
         }
     }
 }

@@ -58,8 +58,7 @@ namespace TaskManagement
                     warning.Text = "User Already Exist";
                     warning.Visible = true;
                 }
-                //controller.addNewUser(username_added.Text.Trim(),confirmed_password.Text.Trim(),"employee");
-                //this.Close();
+               
             }
             else
             {
