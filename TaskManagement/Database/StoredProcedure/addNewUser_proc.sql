@@ -8,6 +8,6 @@ AS
 $$
 BEGIN
    INSERT INTO userdata(username,password,role)
-   VALUES (p_username,p_pasword,p_role);
+   VALUES (p_username,p_password,p_role);
 END;
 $$;

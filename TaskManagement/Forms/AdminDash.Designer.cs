@@ -67,7 +67,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(215, 489);
+            panel1.Size = new Size(232, 489);
             panel1.TabIndex = 1;
             // 
             // label1
@@ -84,10 +84,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(46, 58);
+            pictureBox1.Location = new Point(22, 62);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(113, 96);
+            pictureBox1.Size = new Size(108, 95);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -97,7 +97,7 @@
             logged_role.AutoSize = true;
             logged_role.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             logged_role.ForeColor = SystemColors.Control;
-            logged_role.Location = new Point(49, 203);
+            logged_role.Location = new Point(136, 120);
             logged_role.Name = "logged_role";
             logged_role.Size = new Size(48, 20);
             logged_role.TabIndex = 1;
@@ -108,7 +108,7 @@
             logged_name.AutoSize = true;
             logged_name.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             logged_name.ForeColor = SystemColors.Control;
-            logged_name.Location = new Point(48, 180);
+            logged_name.Location = new Point(136, 88);
             logged_name.Name = "logged_name";
             logged_name.Size = new Size(48, 20);
             logged_name.TabIndex = 0;
@@ -145,9 +145,9 @@
             panel2.Controls.Add(closebox);
             panel2.Controls.Add(log_out);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(215, 0);
+            panel2.Location = new Point(232, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(485, 40);
+            panel2.Size = new Size(480, 40);
             panel2.TabIndex = 8;
             // 
             // dataGridView1
@@ -176,7 +176,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(254, 58);
+            dataGridView1.Location = new Point(260, 58);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -200,7 +200,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(700, 489);
+            ClientSize = new Size(712, 489);
             ControlBox = false;
             Controls.Add(dataGridView1);
             Controls.Add(panel2);
@@ -208,6 +208,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
             Name = "AdminDash";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin Dashboard";
             ((System.ComponentModel.ISupportInitialize)userDataBindingSource).EndInit();
             panel1.ResumeLayout(false);

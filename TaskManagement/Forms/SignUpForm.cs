@@ -7,19 +7,19 @@ using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Model;
 using TaskManagement.Controller;
-using TaskManagement.DBconnection;
+using TaskManagement.DataAccess;
 
 namespace TaskManagement
 {
     public partial class SignUpForm : Form
     {
-        public TaskController controller;
+
         public LogInController _controllerauth;
-        public SignUpForm()
+        public SignUpForm(LogInController controller)
         {
             InitializeComponent();
-            controller = new TaskController();
-            _controllerauth=new LogInController();
+
+            _controllerauth = controller;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -45,11 +45,12 @@ namespace TaskManagement
                 MessageBox.Show("Enter username and Password !");
                 return;
             }
-            if (password_added.Text == confirmed_password.Text) {
+            if (password_added.Text == confirmed_password.Text)
+            {
                 bool check = _controllerauth.userNameExist(username_added.Text.Trim());
                 if (check == false)
                 {
-                    controller.addNewUser(username_added.Text.Trim(), confirmed_password.Text.Trim(), "employee");
+                    _controllerauth.addNewUser(username_added.Text.Trim(), confirmed_password.Text.Trim(), "employee");
                     MessageBox.Show(" Account Created ");
                     this.Close();
                 }
@@ -58,13 +59,28 @@ namespace TaskManagement
                     warning.Text = "User Already Exist";
                     warning.Visible = true;
                 }
-               
+
             }
             else
             {
                 warning.Text = "Password not same";
                 warning.Visible = true;
             }
+        }
+
+        private void eyeopen_Click(object sender, EventArgs e)
+        {
+            password_added.UseSystemPasswordChar = true;
+            eyeopen.Visible = false;
+            eyeclose.Visible = true;
+        }
+
+        private void eyeclose_Click(object sender, EventArgs e)
+        {
+            password_added.UseSystemPasswordChar=false;
+            eyeclose.Visible = false;
+            eyeopen.Visible = true;
+
         }
     }
 }

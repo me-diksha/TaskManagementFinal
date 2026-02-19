@@ -7,20 +7,23 @@ using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Model;
 using TaskManagement.Controller;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TaskManagement
 {
     public partial class AdminDash : Form
     {
-        TaskController controller = new TaskController();
-        UserData curruser;
-        public AdminDash(UserData user)
+        TaskController _taskcontroller;
+        LogInController _controllerauth;
+        UserData current_user;
+        public AdminDash(LogInController controllerauth,TaskController controller)
         {
             InitializeComponent();
-            curruser = user;
-            logged_name.Text = controller.getInfo(curruser.Id);
-            logged_role.Text = controller.getrole(curruser.Id);
-            dataGridView1.DataSource = controller.getall("employee");
+          
+            _controllerauth = controllerauth;
+            _taskcontroller = controller;
+            
+            dataGridView1.DataSource = _controllerauth.getall("employee");
             dataGridView1.Columns["Password"].Visible = false;
 
             //to add show task button
@@ -33,7 +36,12 @@ namespace TaskManagement
             dataGridView1.Columns.Add(btnColumn);
 
         }
-
+        public void SetUserData(UserData user)
+        {
+            current_user = user;
+            logged_name.Text = _controllerauth.getInfo(current_user.Id);
+            logged_role.Text = _controllerauth.getrole(current_user.Id);
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "btnView")
@@ -41,7 +49,9 @@ namespace TaskManagement
                 int userId = Convert.ToInt32(
             dataGridView1.Rows[e.RowIndex].Cells["Id"].Value
               );
-                EmpTaskForm empTaskForm = new EmpTaskForm(userId);
+                
+                var empTaskForm=Program.serviceProvider.GetRequiredService<EmpTaskForm>();
+                empTaskForm.GetuserId(userId);
                 empTaskForm.ShowDialog();
             }
         }

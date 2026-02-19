@@ -60,11 +60,12 @@
             // 
             // update_description
             // 
-            update_description.Location = new Point(201, 54);
+            update_description.Location = new Point(201, 51);
             update_description.Margin = new Padding(3, 2, 3, 2);
+            update_description.MaxLength = 30;
             update_description.Multiline = true;
             update_description.Name = "update_description";
-            update_description.Size = new Size(146, 26);
+            update_description.Size = new Size(214, 29);
             update_description.TabIndex = 2;
             // 
             // buttonUpdate
@@ -125,6 +126,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(441, 189);
+            ControlBox = false;
             Controls.Add(label3);
             Controls.Add(chkStatus);
             Controls.Add(buttonCancel);
@@ -132,10 +134,11 @@
             Controls.Add(update_description);
             Controls.Add(label2);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
             Name = "EditForm";
-            Text = "Form5";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "EditForm";
             ResumeLayout(false);
             PerformLayout();
         }

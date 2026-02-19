@@ -12,13 +12,21 @@ namespace TaskManagement
     public partial class AddForm : Form
     {
         int curruser_id;
-        TaskController _controllertask = new TaskController();
-        public AddForm(int currid)
+        TaskController _controllertask ;
+        BindingList<TaskList> _taskBindingList;
+        public AddForm(TaskController controller)
         {
             InitializeComponent();
-            curruser_id = currid;
+            _controllertask = controller;
+            new_description.Text = "";
         }
 
+        public void SetUserId(int id,BindingList<TaskList>ta)
+        {
+            curruser_id = id;
+            _taskBindingList= ta;
+
+        }
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -28,28 +36,23 @@ namespace TaskManagement
         {
             if (new_description.Text == "")
             {
-                MessageBox.Show("Add task description ");
+                MessageBox.Show("Add task description", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            //int nextTaskId = 1;
-            //foreach (TaskList task in Data.tasks)
-            //{
-            //    if (task.userId == curruser_id && task.taskId >= nextTaskId)
-            //    {
-            //        nextTaskId = task.taskId + 1;
-            //    }
-            //}
+            
             TaskList newtask = new TaskList
             {
-                //taskId = nextTaskId,
+               
                 userId = curruser_id,
                 description = new_description.Text,
                 status = chkstatus.Checked
             };
             _controllertask.AddTask(newtask);
-            MessageBox.Show("Task added ! ");
+            _taskBindingList.Add(newtask);
+            MessageBox.Show("Task added ! ","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
             
             this.Close();
+
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

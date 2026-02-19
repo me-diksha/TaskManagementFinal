@@ -198,10 +198,10 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(23, 72);
+            pictureBox1.Location = new Point(12, 60);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(101, 77);
+            pictureBox1.Size = new Size(112, 94);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -266,6 +266,7 @@
             Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "EmployeeDash";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Employee Dashboard";
             Load += EmployeeDash_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

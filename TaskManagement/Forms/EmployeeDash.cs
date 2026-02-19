@@ -1,34 +1,44 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using TaskManagement.Model;
 using TaskManagement.Controller;
+using TaskManagement.Model;
+
+
 namespace TaskManagement
 {
     public partial class EmployeeDash : Form
     {
         UserData current_user;
-        TaskController _controllertask = new TaskController();
-        public EmployeeDash(UserData user)
+        TaskController _controllertask ;
+        LogInController _controllerauth;
+        BindingList<TaskList> tasks=new BindingList<TaskList>();
+        public EmployeeDash(LogInController contollerauth,TaskController controller)
         {
             InitializeComponent();
+            _controllertask = controller;
+            _controllerauth = contollerauth;
+           
+        }
+
+        public void SetUserData(UserData user)
+        {
             current_user = user;
-            logged_name.Text = _controllertask.getInfo(current_user.Id);
-            logged_role.Text = _controllertask.getrole(current_user.Id);
-          
+            logged_name.Text = _controllerauth.getInfo(current_user.Id);
+            logged_role.Text = _controllerauth.getrole(current_user.Id);
+
             RefreshGrid();
         }
 
-
-
         private void RefreshGrid()
         {
-          
-            dataGridView1.DataSource = _controllertask.showtask(current_user.Id);
+            tasks = _controllertask.showtask(current_user.Id);
+            dataGridView1.DataSource = tasks;
             dataGridView1.Columns["UserId"].Visible = false;
          
         }
@@ -39,11 +49,10 @@ namespace TaskManagement
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddForm f = new AddForm(current_user.Id);
-            f.ShowDialog();
-            
-            RefreshGrid();
-
+            var addForm = Program.serviceProvider.GetRequiredService<AddForm>();
+            addForm.SetUserId(current_user.Id,tasks);
+            addForm.Show();
+          
         }
 
 
@@ -52,10 +61,15 @@ namespace TaskManagement
         {
             if (dataGridView1.CurrentRow == null) return;
             TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
-            new EditForm(task).ShowDialog();
             
-            RefreshGrid();
-
+            var editForm = Program.serviceProvider.GetRequiredService<EditForm>();
+            editForm.SetTask(task);
+            editForm.Show();
+            //if (editForm.ShowDialog(this) == DialogResult.OK)
+            //{
+            //    RefreshGrid();
+               
+            //}
         }
 
 
@@ -78,13 +92,13 @@ namespace TaskManagement
               
                 TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
                 _controllertask.deletetask(task);
-                MessageBox.Show("Item deleted.");
-                RefreshGrid();
+                MessageBox.Show("Item deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tasks.Remove(task);
             }
             else
             {
              
-                MessageBox.Show("Operation cancelled.");
+                MessageBox.Show("Operation cancelled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
            
 

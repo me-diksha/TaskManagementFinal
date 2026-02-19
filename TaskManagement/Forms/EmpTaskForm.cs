@@ -12,18 +12,24 @@ namespace TaskManagement
 {
     public partial class EmpTaskForm : Form
     {
-        TaskController controller = new TaskController();
+        TaskController _taskcontroller;
+        LogInController _controllerauth;
         int userId;
-        public EmpTaskForm(int userId)
+        public EmpTaskForm(TaskController controller,LogInController controllerauth)
         {
             InitializeComponent();
-            this.userId = userId;
-            info.Text = controller.getInfo(userId);
-            dataGridView1.DataSource = controller.showtask(userId);
             
+            _controllerauth = controllerauth;
+            _taskcontroller = controller;
+            
+        }
+        public void GetuserId(int user_Id)
+        {
+            userId = user_Id;
+            info.Text = _controllerauth.getInfo(userId);
+            dataGridView1.DataSource = _taskcontroller.showtask(userId);
             RefreshGrid();
         }
-
 
         private void RefreshGrid()
         {
@@ -36,7 +42,7 @@ namespace TaskManagement
         }
         private void buttoncompleted_task_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = controller.completed_task(userId,true);
+            dataGridView1.DataSource = _taskcontroller.gettask_byStatus(userId,true);
          
             RefreshGrid();
         }
@@ -45,7 +51,7 @@ namespace TaskManagement
 
         private void buttonpendingtask_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = controller.pending_task(userId,false);
+            dataGridView1.DataSource = _taskcontroller.gettask_byStatus(userId,false);
             
             RefreshGrid();
         }
@@ -54,7 +60,7 @@ namespace TaskManagement
 
         private void buttonshowtask_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = controller.showtask(userId);
+            dataGridView1.DataSource = _taskcontroller.showtask(userId);
             
             RefreshGrid();
         }

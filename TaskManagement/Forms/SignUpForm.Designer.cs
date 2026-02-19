@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUpForm));
             splitContainer1 = new SplitContainer();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            eyeclose = new PictureBox();
+            eyeopen = new PictureBox();
             warning = new Label();
             confirmed_password = new TextBox();
             close_form = new Label();
@@ -44,6 +47,8 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)eyeclose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -63,6 +68,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = SystemColors.ControlLightLight;
+            splitContainer1.Panel2.Controls.Add(eyeclose);
+            splitContainer1.Panel2.Controls.Add(eyeopen);
             splitContainer1.Panel2.Controls.Add(warning);
             splitContainer1.Panel2.Controls.Add(confirmed_password);
             splitContainer1.Panel2.Controls.Add(close_form);
@@ -110,6 +117,29 @@
             label3.TabIndex = 1;
             label3.Text = "WELCOME";
             // 
+            // eyeclose
+            // 
+            eyeclose.Image = (Image)resources.GetObject("eyeclose.Image");
+            eyeclose.Location = new Point(337, 169);
+            eyeclose.Name = "eyeclose";
+            eyeclose.Size = new Size(33, 40);
+            eyeclose.SizeMode = PictureBoxSizeMode.StretchImage;
+            eyeclose.TabIndex = 15;
+            eyeclose.TabStop = false;
+            eyeclose.Click += eyeclose_Click;
+            // 
+            // eyeopen
+            // 
+            eyeopen.Image = (Image)resources.GetObject("eyeopen.Image");
+            eyeopen.Location = new Point(336, 169);
+            eyeopen.Name = "eyeopen";
+            eyeopen.Size = new Size(34, 41);
+            eyeopen.SizeMode = PictureBoxSizeMode.StretchImage;
+            eyeopen.TabIndex = 14;
+            eyeopen.TabStop = false;
+            eyeopen.Visible = false;
+            eyeopen.Click += eyeopen_Click;
+            // 
             // warning
             // 
             warning.AutoSize = true;
@@ -126,7 +156,7 @@
             // 
             confirmed_password.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             confirmed_password.ForeColor = Color.DarkGoldenrod;
-            confirmed_password.Location = new Point(102, 205);
+            confirmed_password.Location = new Point(102, 212);
             confirmed_password.Name = "confirmed_password";
             confirmed_password.PlaceholderText = "Confirm Password";
             confirmed_password.Size = new Size(228, 22);
@@ -164,12 +194,13 @@
             // 
             password_added.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             password_added.ForeColor = Color.DarkGoldenrod;
-            password_added.Location = new Point(102, 177);
+            password_added.Location = new Point(102, 181);
             password_added.Name = "password_added";
             password_added.PlaceholderText = "Enter Password";
             password_added.Size = new Size(228, 22);
             password_added.TabIndex = 4;
             password_added.TextAlign = HorizontalAlignment.Center;
+            password_added.UseSystemPasswordChar = true;
             // 
             // username_added
             // 
@@ -222,6 +253,8 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)eyeclose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -240,5 +273,7 @@
         private TextBox confirmed_password;
         private Label close_form;
         private Label warning;
+        private PictureBox eyeopen;
+        private PictureBox eyeclose;
     }
 }

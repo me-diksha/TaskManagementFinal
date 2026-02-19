@@ -2,8 +2,11 @@
 
 -- DROP FUNCTION IF EXISTS public.get_next_taskid_fun(integer);
 
-CREATE OR REPLACE FUNCTION public.get_next_taskid_fun(
-	p_userid integer)
+CREATE OR REPLACE FUNCTION public.get_next_taskid_fun
+   (
+	
+    p_userid integer
+    )
     RETURNS integer
     LANGUAGE 'plpgsql'
     COST 100

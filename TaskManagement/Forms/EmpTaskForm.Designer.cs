@@ -203,6 +203,7 @@
             Controls.Add(dataGridView1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "EmpTaskForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Task Status";
             Load += EmpTaskForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

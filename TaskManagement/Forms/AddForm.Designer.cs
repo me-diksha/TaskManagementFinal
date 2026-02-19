@@ -61,6 +61,7 @@
             // 
             new_description.Location = new Point(181, 68);
             new_description.Margin = new Padding(3, 2, 3, 2);
+            new_description.MaxLength = 30;
             new_description.Multiline = true;
             new_description.Name = "new_description";
             new_description.Size = new Size(110, 26);
@@ -127,6 +128,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(413, 199);
+            ControlBox = false;
             Controls.Add(chkstatus);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
@@ -134,9 +136,10 @@
             Controls.Add(new_description);
             Controls.Add(label2);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
             Name = "AddForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ADD TASK";
             ResumeLayout(false);
             PerformLayout();

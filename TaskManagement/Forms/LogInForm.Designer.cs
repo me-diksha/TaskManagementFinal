@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             splitContainer1 = new SplitContainer();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            eyeclose = new PictureBox();
+            eyeopen = new PictureBox();
             close_form = new Label();
-            chkShowPassword = new CheckBox();
             ask_create_account = new Label();
             label6 = new Label();
             warning = new Label();
@@ -47,6 +49,8 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)eyeclose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -68,8 +72,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(eyeclose);
+            splitContainer1.Panel2.Controls.Add(eyeopen);
             splitContainer1.Panel2.Controls.Add(close_form);
-            splitContainer1.Panel2.Controls.Add(chkShowPassword);
             splitContainer1.Panel2.Controls.Add(ask_create_account);
             splitContainer1.Panel2.Controls.Add(label6);
             splitContainer1.Panel2.Controls.Add(warning);
@@ -117,6 +122,31 @@
             label3.TabIndex = 0;
             label3.Text = "WELCOME";
             // 
+            // eyeclose
+            // 
+            eyeclose.BackColor = Color.Transparent;
+            eyeclose.Image = (Image)resources.GetObject("eyeclose.Image");
+            eyeclose.Location = new Point(362, 183);
+            eyeclose.Name = "eyeclose";
+            eyeclose.Size = new Size(33, 40);
+            eyeclose.SizeMode = PictureBoxSizeMode.StretchImage;
+            eyeclose.TabIndex = 16;
+            eyeclose.TabStop = false;
+            eyeclose.Click += eyeclose_Click;
+            // 
+            // eyeopen
+            // 
+            eyeopen.BackColor = Color.Transparent;
+            eyeopen.Image = (Image)resources.GetObject("eyeopen.Image");
+            eyeopen.Location = new Point(361, 182);
+            eyeopen.Name = "eyeopen";
+            eyeopen.Size = new Size(34, 41);
+            eyeopen.SizeMode = PictureBoxSizeMode.StretchImage;
+            eyeopen.TabIndex = 15;
+            eyeopen.TabStop = false;
+            eyeopen.Visible = false;
+            eyeopen.Click += eyeopen_Click;
+            // 
             // close_form
             // 
             close_form.AutoSize = true;
@@ -128,18 +158,6 @@
             close_form.TabIndex = 10;
             close_form.Text = "X";
             close_form.Click += close_form_Click;
-            // 
-            // chkShowPassword
-            // 
-            chkShowPassword.AutoSize = true;
-            chkShowPassword.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkShowPassword.Location = new Point(248, 218);
-            chkShowPassword.Name = "chkShowPassword";
-            chkShowPassword.Size = new Size(107, 17);
-            chkShowPassword.TabIndex = 9;
-            chkShowPassword.Text = "Show Password";
-            chkShowPassword.UseVisualStyleBackColor = true;
-            chkShowPassword.CheckedChanged += chkShowPassword_CheckedChanged;
             // 
             // ask_create_account
             // 
@@ -262,6 +280,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
             Name = "LogInForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LogIn";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
@@ -269,6 +288,8 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)eyeclose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -287,7 +308,8 @@
         private Label warning;
         private Label ask_create_account;
         private Label label6;
-        private CheckBox chkShowPassword;
         private Label close_form;
+        private PictureBox eyeopen;
+        private PictureBox eyeclose;
     }
 }

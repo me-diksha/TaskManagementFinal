@@ -13,7 +13,7 @@ AS $$
 BEGIN
     RETURN QUERY
     SELECT
-	u.id AS id,
+	 u.id AS id,
 	 u.username AS username, 
 	 u.password AS password,
 	 u.role AS role
