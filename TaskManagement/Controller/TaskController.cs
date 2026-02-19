@@ -5,66 +5,33 @@ using System.Text;
 using TaskManagement.Controller;
 using TaskManagement.Model;
 using Npgsql;
-using TaskManagement.DBconnection;
+using TaskManagement.DataAccess;
+using TaskManagement.Services.Interface;
 
 
 namespace TaskManagement.Controller
 {
     public class TaskController
     {
-
+        private readonly ITaskService _taskservice;
+        public TaskController(ITaskService taskservice)
+        {
+            _taskservice = taskservice;
+        }
 
         public BindingList<TaskList> showtask(int user_id)
         {
-            BindingList<TaskList> task_currentuser = new BindingList<TaskList>();
-            
-            using (var conn = DBHelper.GetConnection())
-            {
-                conn.Open();
-               
-                using (var cmd = new NpgsqlCommand("SELECT * FROM showtask_fun(@uid);", conn))
-                {
-                    cmd.Parameters.AddWithValue("@uid", user_id);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read()) {
-                            task_currentuser.Add(new TaskList
-                            {  userId=user_id,
-                               taskId=reader.GetInt32(0),
-                               description=reader.GetString(1),
-                               status=reader.GetBoolean(2)
-
-                            });
-                        } 
-                    }
-                }
-            }
-            return task_currentuser;
+           
+           return _taskservice.showtask_forUser(user_id);
         }
 
 
 
       
-        public void changepassword(string username_added,string updated_password)
-        {
-            using (var conn = DBHelper.GetConnection()) {
-                conn.Open();
-               
-                using (var cmd = new NpgsqlCommand("CALL changepassword_proc(@username_added,@updated_password);", conn))
-                {
+       
 
 
-                    cmd.Parameters.AddWithValue("@username_added", username_added);
-                    cmd.Parameters.AddWithValue("@updated_password", updated_password);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        
-
-
-        public  string getInfo(int user_id)
+       /* public  string getInfo(int user_id)
         {
             
             using (var conn = DBHelper.GetConnection()) { 
@@ -78,9 +45,9 @@ namespace TaskManagement.Controller
             }
             
         }
+       */
 
-
-        public string getrole(int user_id)
+       /* public string getrole(int user_id)
         {
          
            using(var conn = DBHelper.GetConnection())
@@ -95,10 +62,10 @@ namespace TaskManagement.Controller
             }
             
         }
+       */
 
 
-
-        public int getNextTaskId(int user_id)
+       /* public int getNextTaskId(int user_id)
         {
             using (var conn = DBHelper.GetConnection()) {
                 conn.Open();
@@ -110,14 +77,17 @@ namespace TaskManagement.Controller
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
+          
+           return _taskservice.getNextTaskId(user_id);
             
         }
+       */
 
 
         public void AddTask(TaskList task) {
            
             
-            using (var conn = DBHelper.GetConnection())
+         /*   using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
                 using (var cmd = new NpgsqlCommand("CALL add_task_proc(@uid,@tid,@desc,@status);", conn))
@@ -135,13 +105,15 @@ namespace TaskManagement.Controller
                 }
 
             }
+         */
+                  _taskservice.AddTask(task);
             }
 
 
        
         public void updatetask(TaskList task)
         {
-            using (var conn = DBHelper.GetConnection())
+            /*using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
                 
@@ -156,6 +128,8 @@ namespace TaskManagement.Controller
                     cmd.ExecuteNonQuery();
                 }
             }
+            */
+            _taskservice.updatetask(task);
         }
 
 
@@ -163,7 +137,7 @@ namespace TaskManagement.Controller
         {
          
 
-            using (var conn = DBHelper.GetConnection())
+           /* using (var conn = DBHelper.GetConnection())
             {
                 conn.Open();
 
@@ -175,12 +149,13 @@ namespace TaskManagement.Controller
 
                     cmd.ExecuteNonQuery();
                 }
-            }
+            }*/
+           _taskservice.deletetask(task);
         }
 
 
 
-        public BindingList<UserData> getall(string getrole)
+       /* public BindingList<UserData> getall(string getrole)
 
         {
             BindingList<UserData> giveuser= new BindingList<UserData>();
@@ -208,13 +183,17 @@ namespace TaskManagement.Controller
             }
             return giveuser;
         }
+       */
 
 
 
        
+        public BindingList<TaskList> gettask_byStatus(int userId, bool status)
+        {
+            return _taskservice.gettask_byStatus(userId, status);
+        }
 
-
-        public BindingList<TaskList> completed_task(int userId,bool status)
+       /* public BindingList<TaskList> completed_task(int userId,bool status)
         {
             BindingList<TaskList> task_cmp = new BindingList<TaskList>();
            
@@ -240,12 +219,13 @@ namespace TaskManagement.Controller
                 }
             return task_cmp;
         }
+       */
 
 
        
 
 
-        public BindingList<TaskList> pending_task(int userId,bool status)
+       /* public BindingList<TaskList> pending_task(int userId,bool status)
         {
             BindingList<TaskList> task_pending = new BindingList<TaskList>();
             
@@ -276,11 +256,12 @@ namespace TaskManagement.Controller
 
             return task_pending;
         }
+       */
 
        
 
   
-        public void addNewUser(string addusername, string addpassword,string role)
+       /* public void addNewUser(string addusername, string addpassword,string role)
         {
             using (var conn = DBHelper.GetConnection()) {
                 conn.Open();
@@ -294,6 +275,7 @@ namespace TaskManagement.Controller
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
+            
+        }*/
     }
 }
