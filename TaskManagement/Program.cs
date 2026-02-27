@@ -1,14 +1,11 @@
 using TaskManagement.Forms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Configuration.Json;
-using TaskManagement.DataAccess.Interfaces;
-using TaskManagement.DataAccess;
-using TaskManagement.Repositories.Interface;
-using TaskManagement.Repositories.Implementation;
-using TaskManagement.Services.Interface;
-using TaskManagement.Services.Implementation;
-using TaskManagement.Controller;
+
+
+using TaskManagement.Apiservices;
 
 namespace TaskManagement
 {
@@ -24,36 +21,25 @@ namespace TaskManagement
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            var configuration=new ConfigurationBuilder()
-                
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            //var configuration=new ConfigurationBuilder()
 
-            var services= new ServiceCollection();
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .Build();
 
-           
+            var services = new ServiceCollection();
+
+            services.AddHttpClient<APIauthService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7016/");
+            });
+
+            services.AddHttpClient<APITaskService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7016/");
+            });
 
             // made a method to set dependency injection of all interfaces nd implementation once
-            ConfigureServices(services, configuration);
-
-             serviceProvider= services.BuildServiceProvider();
-            
-
-
-            var loginForm=serviceProvider.GetRequiredService<LogInForm>();
-            Application.Run(loginForm);
-        }
-        private static void ConfigureServices(IServiceCollection services,IConfiguration configuration)
-        {
-            services.AddSingleton<IConfiguration>(configuration);
-            services.AddScoped<IConnectionFactory, ConnectionFactory>();
-            services.AddScoped<IDataAccess, DBHelper>();
-            services.AddScoped<ITaskRepo,TaskRepo>();
-            services.AddScoped<IUserRepo,UserRepo>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITaskService, TaskService>();
-            services.AddScoped<LogInController>();
-            services.AddScoped<TaskController>();
+            //ConfigureServices(services, configuration);
 
             services.AddTransient<LogInForm>();
             services.AddTransient<EmployeeDash>();
@@ -63,6 +49,15 @@ namespace TaskManagement
             services.AddTransient<SignUpForm>();
             services.AddTransient<ForgotPasswordForm>();
             services.AddTransient<EmpTaskForm>();
+            serviceProvider = services.BuildServiceProvider();
+
+
+
+            var loginForm = serviceProvider.GetRequiredService<LogInForm>();
+            Application.Run(loginForm);
+
+
+
         }
     }
 }
