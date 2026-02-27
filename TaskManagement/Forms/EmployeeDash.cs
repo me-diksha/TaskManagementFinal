@@ -6,8 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using TaskManagement.Apiservices;
-
+using TaskManagement.Controller;
 using TaskManagement.Model;
 
 
@@ -16,32 +15,29 @@ namespace TaskManagement
     public partial class EmployeeDash : Form
     {
         UserData current_user;
-        private readonly APIauthService _authservice;
-       
-        private readonly APITaskService _taskService;
-       
-        BindingList<TaskList> tasks;
-        public EmployeeDash(APIauthService authservice, APITaskService taskService)
+        TaskController _controllertask ;
+        LogInController _controllerauth;
+        BindingList<TaskList> tasks=new BindingList<TaskList>();
+        public EmployeeDash(LogInController contollerauth,TaskController controller)
         {
             InitializeComponent();
-            
-            _authservice = authservice;
-            _taskService = taskService;
+            _controllertask = controller;
+            _controllerauth = contollerauth;
+           
         }
 
-        public async void SetUserData(UserData user)
+        public void SetUserData(UserData user)
         {
             current_user = user;
-            logged_name.Text = await _authservice.getname(current_user.Id);
-            logged_role.Text = await _authservice.getrole(current_user.Id);
+            logged_name.Text = _controllerauth.getInfo(current_user.Id);
+            logged_role.Text = _controllerauth.getrole(current_user.Id);
 
-             RefreshGrid();
+            RefreshGrid();
         }
 
-        private async  void RefreshGrid()
+        private void RefreshGrid()
         {
-            var taskslist = await _taskService.GetTask(current_user.Id);
-            tasks=new BindingList<TaskList>(taskslist);
+            tasks = _controllertask.showtask(current_user.Id);
             dataGridView1.DataSource = tasks;
             dataGridView1.Columns["UserId"].Visible = false;
          
@@ -78,7 +74,7 @@ namespace TaskManagement
 
 
 
-        private async void buttonDelete_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow == null) return;
             
@@ -95,17 +91,9 @@ namespace TaskManagement
             {
               
                 TaskList task = (TaskList)dataGridView1.CurrentRow.DataBoundItem;
-                bool ans = await _taskService.Deletetask(task);
-                if (ans)
-                {
-                    MessageBox.Show("Item deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    tasks.Remove(task);
-                }
-                else
-                {
-
-                    MessageBox.Show("Operation cancelled.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                _controllertask.deletetask(task);
+                MessageBox.Show("Item deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tasks.Remove(task);
             }
             else
             {

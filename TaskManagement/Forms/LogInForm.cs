@@ -1,5 +1,5 @@
 using TaskManagement.Model;
-
+using TaskManagement.Controller;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,17 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Forms;
-using TaskManagement.Apiservices;
 using Microsoft.Extensions.DependencyInjection;
 namespace TaskManagement
 {
     public partial class LogInForm : Form
     {
-        private readonly APIauthService _authservice;
+        private readonly LogInController _controllerauth;
         private readonly IServiceProvider _serviceProvider;
-        public LogInForm(IServiceProvider provider,APIauthService authservice)
+        public LogInForm(IServiceProvider provider,LogInController controller)
         {
             InitializeComponent();
-            _authservice = authservice;
+            _controllerauth = controller;
             _serviceProvider = provider;
         }
 
@@ -30,14 +29,14 @@ namespace TaskManagement
         }
 
         //login button
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (username_added.Text == "" || password_added.Text == "" || username_added.Text == "Enter username")
             {
                 MessageBox.Show("Enter username and Password !");
                 return;
             }
-            UserData newuser = await _authservice.Login(username_added.Text.Trim(), password_added.Text.Trim());
+            UserData newuser = _controllerauth.authenticate(username_added.Text.Trim(), password_added.Text.Trim());
             if (newuser == null)
             {
                 warning.Text = "Invalid Username and Password";
@@ -52,7 +51,7 @@ namespace TaskManagement
                    
                     //new EmployeeDash(newuser).Show();
                     var employeeDash = _serviceProvider.GetRequiredService<EmployeeDash>();
-                     employeeDash.SetUserData(newuser);
+                    employeeDash.SetUserData(newuser);
                     employeeDash.Show();
                    
                 }
@@ -72,7 +71,6 @@ namespace TaskManagement
         {
             var signupForm = _serviceProvider.GetRequiredService<SignUpForm>();
             signupForm.Show();
-            
         }
 
 

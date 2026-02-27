@@ -6,62 +6,61 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Model;
-
-using TaskManagement.Apiservices;
+using TaskManagement.Controller;
 
 namespace TaskManagement
 {
     public partial class EmpTaskForm : Form
     {
-        private readonly APIauthService _authservice;
-
-        private readonly APITaskService _taskService;
+        TaskController _taskcontroller;
+        LogInController _controllerauth;
         int userId;
-        public EmpTaskForm(APIauthService authservice, APITaskService taskService)
+        public EmpTaskForm(TaskController controller,LogInController controllerauth)
         {
             InitializeComponent();
-
-            _authservice = authservice;
-            _taskService = taskService;
+            
+            _controllerauth = controllerauth;
+            _taskcontroller = controller;
+            
         }
-        public async void GetuserId(int user_Id)
+        public void GetuserId(int user_Id)
         {
             userId = user_Id;
-            info.Text = await _authservice.getname(userId);
-            dataGridView1.DataSource = await _taskService.GetTask(userId);
+            info.Text = _controllerauth.getInfo(userId);
+            dataGridView1.DataSource = _taskcontroller.showtask(userId);
             RefreshGrid();
         }
 
         private void RefreshGrid()
         {
-            dataGridView1.Columns["UserId"].Visible = false;
+            dataGridView1.Columns["userId"].Visible = false;
             
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
 
         }
-        private async void buttoncompleted_task_Click(object sender, EventArgs e)
+        private void buttoncompleted_task_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource =await _taskService.GetTaskByStatus(userId,true);
+            dataGridView1.DataSource = _taskcontroller.gettask_byStatus(userId,true);
          
             RefreshGrid();
         }
 
 
 
-        private async void buttonpendingtask_Click(object sender, EventArgs e)
+        private void buttonpendingtask_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = await _taskService.GetTaskByStatus(userId,false);
+            dataGridView1.DataSource = _taskcontroller.gettask_byStatus(userId,false);
             
             RefreshGrid();
         }
 
 
 
-        private async void buttonshowtask_Click(object sender, EventArgs e)
+        private void buttonshowtask_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = await _taskService.GetTask(userId);
+            dataGridView1.DataSource = _taskcontroller.showtask(userId);
             
             RefreshGrid();
         }

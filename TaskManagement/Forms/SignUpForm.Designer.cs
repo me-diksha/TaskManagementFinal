@@ -120,7 +120,7 @@
             // eyeclose
             // 
             eyeclose.Image = (Image)resources.GetObject("eyeclose.Image");
-            eyeclose.Location = new Point(337, 170);
+            eyeclose.Location = new Point(337, 169);
             eyeclose.Name = "eyeclose";
             eyeclose.Size = new Size(33, 40);
             eyeclose.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -246,7 +246,6 @@
             ControlBox = false;
             Controls.Add(splitContainer1);
             Name = "SignUpForm";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "SignUpForm";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

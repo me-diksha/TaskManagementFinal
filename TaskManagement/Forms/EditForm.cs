@@ -6,19 +6,18 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Model;
-
-using TaskManagement.Apiservices;
+using TaskManagement.Controller;
 namespace TaskManagement
 {
     public partial class EditForm : Form
     {
         public TaskList selectedTask;
-        private readonly APITaskService _taskservice;
+        TaskController _taskcontroller;
        
-        public EditForm(APITaskService taskservice)
+        public EditForm(TaskController controller)
         {
             InitializeComponent();
-           _taskservice = taskservice;
+            _taskcontroller = controller;
          
 
         }
@@ -31,18 +30,17 @@ namespace TaskManagement
             chkStatus.Checked = selectedTask.status;
 
         }
-        private async void buttonUpdate_Click(object sender, EventArgs e)
+        private void buttonUpdate_Click(object sender, EventArgs e)
         {
             selectedTask.Description = update_description.Text;
             selectedTask.Status=chkStatus.Checked;
             
                 
             
-            bool result= await _taskservice.Updatetask(selectedTask);
-            if (result)
-            {
-                MessageBox.Show(" Task updated ! ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            _taskcontroller.updatetask(selectedTask);
+            
+            MessageBox.Show(" Task updated ! ","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            
             this.Close();
         }
 

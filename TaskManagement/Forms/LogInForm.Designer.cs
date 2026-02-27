@@ -35,6 +35,7 @@
             label3 = new Label();
             eyeclose = new PictureBox();
             eyeopen = new PictureBox();
+            close_form = new Label();
             ask_create_account = new Label();
             label6 = new Label();
             warning = new Label();
@@ -73,6 +74,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(eyeclose);
             splitContainer1.Panel2.Controls.Add(eyeopen);
+            splitContainer1.Panel2.Controls.Add(close_form);
             splitContainer1.Panel2.Controls.Add(ask_create_account);
             splitContainer1.Panel2.Controls.Add(label6);
             splitContainer1.Panel2.Controls.Add(warning);
@@ -145,6 +147,18 @@
             eyeopen.Visible = false;
             eyeopen.Click += eyeopen_Click;
             // 
+            // close_form
+            // 
+            close_form.AutoSize = true;
+            close_form.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            close_form.ForeColor = Color.IndianRed;
+            close_form.Location = new Point(406, 17);
+            close_form.Name = "close_form";
+            close_form.Size = new Size(23, 25);
+            close_form.TabIndex = 10;
+            close_form.Text = "X";
+            close_form.Click += close_form_Click;
+            // 
             // ask_create_account
             // 
             ask_create_account.AutoSize = true;
@@ -197,7 +211,7 @@
             // 
             forgot_page_load.AutoSize = true;
             forgot_page_load.ForeColor = Color.DarkGoldenrod;
-            forgot_page_load.Location = new Point(123, 220);
+            forgot_page_load.Location = new Point(123, 218);
             forgot_page_load.Name = "forgot_page_load";
             forgot_page_load.Size = new Size(100, 15);
             forgot_page_load.TabIndex = 4;
@@ -209,7 +223,7 @@
             password_added.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             password_added.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             password_added.ForeColor = Color.DarkGoldenrod;
-            password_added.Location = new Point(127, 196);
+            password_added.Location = new Point(127, 191);
             password_added.Margin = new Padding(3, 2, 3, 2);
             password_added.Name = "password_added";
             password_added.PlaceholderText = "Enter Password";
@@ -261,13 +275,13 @@
             AutoSize = true;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(700, 372);
+            ControlBox = false;
             Controls.Add(splitContainer1);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 2, 3, 2);
-            MaximizeBox = false;
-            MinimizeBox = false;
             Name = "LogInForm";
             StartPosition = FormStartPosition.CenterScreen;
+            Text = "LogIn";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
