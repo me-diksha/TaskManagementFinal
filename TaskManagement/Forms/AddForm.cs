@@ -6,18 +6,19 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagement.Model;
-using TaskManagement.Controller;
+using TaskManagement.Apiservices;
+
 namespace TaskManagement
 {
     public partial class AddForm : Form
     {
         int curruser_id;
-        TaskController _controllertask ;
+        private readonly APITaskService _taskservice;
         BindingList<TaskList> _taskBindingList;
-        public AddForm(TaskController controller)
+        public AddForm(  APITaskService taskservice)
         {
             InitializeComponent();
-            _controllertask = controller;
+            _taskservice = taskservice;
             new_description.Text = "";
         }
 
@@ -32,7 +33,7 @@ namespace TaskManagement
 
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private async void buttonSave_Click(object sender, EventArgs e)
         {
             if (new_description.Text == "")
             {
@@ -47,9 +48,17 @@ namespace TaskManagement
                 description = new_description.Text,
                 status = chkstatus.Checked
             };
-            _controllertask.AddTask(newtask);
-            _taskBindingList.Add(newtask);
-            MessageBox.Show("Task added ! ","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            var result= await _taskservice.Addtask(newtask);
+            if (result!=null) {
+                _taskBindingList.Add(result);
+                MessageBox.Show("Task added ! ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+               
+                MessageBox.Show("Operation canceled! ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+           
             
             this.Close();
 

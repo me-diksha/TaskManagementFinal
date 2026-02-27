@@ -210,6 +210,7 @@
             Name = "AdminDash";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Admin Dashboard";
+            Load += AdminDash_Load;
             ((System.ComponentModel.ISupportInitialize)userDataBindingSource).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
