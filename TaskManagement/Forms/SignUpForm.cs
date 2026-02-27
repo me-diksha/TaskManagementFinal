@@ -5,21 +5,22 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using TaskManagement.Apiservices;
+
 using TaskManagement.Model;
-using TaskManagement.Controller;
-using TaskManagement.DataAccess;
+
 
 namespace TaskManagement
 {
     public partial class SignUpForm : Form
     {
 
-        public LogInController _controllerauth;
-        public SignUpForm(LogInController controller)
+        private readonly APIauthService _authservice;
+        public SignUpForm(APIauthService authservice)
         {
             InitializeComponent();
 
-            _controllerauth = controller;
+            _authservice = authservice;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -35,10 +36,11 @@ namespace TaskManagement
         private void close_form_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
 
-        private void buttonSignUp_Click(object sender, EventArgs e)
+        private async void buttonSignUp_Click(object sender, EventArgs e)
         {
             if (username_added.Text == "" || password_added.Text == "" || confirmed_password.Text == "")
             {
@@ -47,11 +49,15 @@ namespace TaskManagement
             }
             if (password_added.Text == confirmed_password.Text)
             {
-                bool check = _controllerauth.userNameExist(username_added.Text.Trim());
+                bool check = await _authservice.usernameExist(username_added.Text.Trim());
                 if (check == false)
                 {
-                    _controllerauth.addNewUser(username_added.Text.Trim(), confirmed_password.Text.Trim(), "employee");
-                    MessageBox.Show(" Account Created ");
+                   bool result= await _authservice.Adduser(username_added.Text.Trim(), confirmed_password.Text.Trim(), "employee");
+                    if(result)MessageBox.Show(" Account Created ");
+                    else
+                    {
+                        MessageBox.Show("User Not added !", "Information");
+                    }
                     this.Close();
                 }
                 else

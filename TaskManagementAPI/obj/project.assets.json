@@ -122,11 +122,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagementAPI\\TaskManagementAPI.csproj",
+      "projectUniqueName": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagementAPI\\TaskManagementAPI.csproj",
       "projectName": "TaskManagementAPI",
-      "projectPath": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagementAPI\\TaskManagementAPI.csproj",
+      "projectPath": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagementAPI\\TaskManagementAPI.csproj",
       "packagesPath": "C:\\Users\\DT-SN007\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagementAPI\\obj\\",
+      "outputPath": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagementAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

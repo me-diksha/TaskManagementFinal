@@ -33,14 +33,13 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
-            eyeopen = new PictureBox();
             eyeclose = new PictureBox();
+            eyeopen = new PictureBox();
             close_form = new Label();
             label1 = new Label();
             warning = new Label();
             buttonReset = new Button();
             confirmed_password = new TextBox();
-            password_added = new TextBox();
             verify_button = new Button();
             username_added = new TextBox();
             pictureBox1 = new PictureBox();
@@ -48,8 +47,8 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)eyeopen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eyeclose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -69,14 +68,13 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = SystemColors.ControlLightLight;
-            splitContainer1.Panel2.Controls.Add(eyeopen);
             splitContainer1.Panel2.Controls.Add(eyeclose);
+            splitContainer1.Panel2.Controls.Add(eyeopen);
             splitContainer1.Panel2.Controls.Add(close_form);
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(warning);
             splitContainer1.Panel2.Controls.Add(buttonReset);
             splitContainer1.Panel2.Controls.Add(confirmed_password);
-            splitContainer1.Panel2.Controls.Add(password_added);
             splitContainer1.Panel2.Controls.Add(verify_button);
             splitContainer1.Panel2.Controls.Add(username_added);
             splitContainer1.Panel2.Controls.Add(pictureBox1);
@@ -117,27 +115,29 @@
             label3.TabIndex = 2;
             label3.Text = "WELCOME";
             // 
-            // eyeopen
-            // 
-            eyeopen.Image = (Image)resources.GetObject("eyeopen.Image");
-            eyeopen.Location = new Point(330, 199);
-            eyeopen.Name = "eyeopen";
-            eyeopen.Size = new Size(34, 41);
-            eyeopen.SizeMode = PictureBoxSizeMode.StretchImage;
-            eyeopen.TabIndex = 19;
-            eyeopen.TabStop = false;
-            eyeopen.Visible = false;
-            // 
             // eyeclose
             // 
             eyeclose.Image = (Image)resources.GetObject("eyeclose.Image");
-            eyeclose.Location = new Point(330, 199);
+            eyeclose.Location = new Point(332, 198);
             eyeclose.Name = "eyeclose";
             eyeclose.Size = new Size(33, 40);
             eyeclose.SizeMode = PictureBoxSizeMode.StretchImage;
-            eyeclose.TabIndex = 18;
+            eyeclose.TabIndex = 19;
             eyeclose.TabStop = false;
             eyeclose.Visible = false;
+            eyeclose.Click += eyeclose_Click;
+            // 
+            // eyeopen
+            // 
+            eyeopen.Image = (Image)resources.GetObject("eyeopen.Image");
+            eyeopen.Location = new Point(331, 198);
+            eyeopen.Name = "eyeopen";
+            eyeopen.Size = new Size(34, 41);
+            eyeopen.SizeMode = PictureBoxSizeMode.StretchImage;
+            eyeopen.TabIndex = 18;
+            eyeopen.TabStop = false;
+            eyeopen.Visible = false;
+            eyeopen.Click += eyeopen_Click;
             // 
             // close_form
             // 
@@ -156,7 +156,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.DarkGoldenrod;
-            label1.Location = new Point(135, 103);
+            label1.Location = new Point(141, 103);
             label1.Name = "label1";
             label1.Size = new Size(148, 21);
             label1.TabIndex = 16;
@@ -167,7 +167,7 @@
             warning.AutoSize = true;
             warning.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             warning.ForeColor = Color.Firebrick;
-            warning.Location = new Point(141, 136);
+            warning.Location = new Point(142, 136);
             warning.Name = "warning";
             warning.Size = new Size(58, 17);
             warning.TabIndex = 15;
@@ -179,7 +179,7 @@
             buttonReset.BackColor = Color.DarkGoldenrod;
             buttonReset.FlatStyle = FlatStyle.Flat;
             buttonReset.ForeColor = SystemColors.Control;
-            buttonReset.Location = new Point(186, 300);
+            buttonReset.Location = new Point(186, 257);
             buttonReset.Name = "buttonReset";
             buttonReset.Padding = new Padding(2);
             buttonReset.Size = new Size(75, 28);
@@ -193,25 +193,14 @@
             // 
             confirmed_password.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             confirmed_password.ForeColor = Color.DarkGoldenrod;
-            confirmed_password.Location = new Point(106, 245);
+            confirmed_password.Location = new Point(106, 209);
             confirmed_password.Name = "confirmed_password";
             confirmed_password.PlaceholderText = "Confirm New Password";
             confirmed_password.Size = new Size(223, 22);
             confirmed_password.TabIndex = 13;
             confirmed_password.TextAlign = HorizontalAlignment.Center;
+            confirmed_password.UseSystemPasswordChar = true;
             confirmed_password.Visible = false;
-            // 
-            // password_added
-            // 
-            password_added.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            password_added.ForeColor = Color.DarkGoldenrod;
-            password_added.Location = new Point(106, 209);
-            password_added.Name = "password_added";
-            password_added.PlaceholderText = "Add New Password";
-            password_added.Size = new Size(218, 22);
-            password_added.TabIndex = 6;
-            password_added.TextAlign = HorizontalAlignment.Center;
-            password_added.Visible = false;
             // 
             // verify_button
             // 
@@ -245,7 +234,7 @@
             // 
             pictureBox1.BackColor = SystemColors.ControlLightLight;
             pictureBox1.Image = Properties.Resources.sonar_img;
-            pictureBox1.Location = new Point(149, 11);
+            pictureBox1.Location = new Point(159, 11);
             pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(112, 85);
@@ -261,6 +250,7 @@
             ControlBox = false;
             Controls.Add(splitContainer1);
             Name = "ForgotPasswordForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ForgotPasswordForm";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
@@ -268,8 +258,8 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)eyeopen).EndInit();
             ((System.ComponentModel.ISupportInitialize)eyeclose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)eyeopen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -280,7 +270,6 @@
         private PictureBox pictureBox1;
         private Button verify_button;
         private TextBox username_added;
-        private TextBox password_added;
         private Label label3;
         private Label label4;
         private Label label5;
@@ -289,7 +278,7 @@
         private Label warning;
         private Label label1;
         private Label close_form;
-        private PictureBox eyeclose;
         private PictureBox eyeopen;
+        private PictureBox eyeclose;
     }
 }

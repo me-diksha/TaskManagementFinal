@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uyMKnNu9b9w=",
+  "dgSpecHash": "ANQ9L7E5bHg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagement\\TaskManagement.csproj",
+  "projectFilePath": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagement\\TaskManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DT-SN007\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.3\\microsoft.extensions.configuration.10.0.3.nupkg.sha512",
     "C:\\Users\\DT-SN007\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.3\\microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512",

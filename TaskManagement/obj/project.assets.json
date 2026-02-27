@@ -1015,11 +1015,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagement\\TaskManagement.csproj",
+      "projectUniqueName": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagement\\TaskManagement.csproj",
       "projectName": "TaskManagement",
-      "projectPath": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagement\\TaskManagement.csproj",
+      "projectPath": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagement\\TaskManagement.csproj",
       "packagesPath": "C:\\Users\\DT-SN007\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DT-SN007\\source\\repos\\TaskManagementFinal\\TaskManagement\\obj\\",
+      "outputPath": "C:\\Users\\DT-SN007\\Desktop\\New folder (2)\\TaskManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
